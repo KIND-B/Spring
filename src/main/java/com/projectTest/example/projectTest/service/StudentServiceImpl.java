@@ -23,8 +23,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public studentUpdateResponse update(studentUpdateRequest studentUpdateRequest) {
-        StudentsEntity studentReq = this.studentRepository.getOne(studentUpdateRequest.getId());
+    public studentUpdateResponse update(studentUpdateRequest studentUpdateRequest, Long id) {
+
+        StudentsEntity studentReq = this.studentRepository.getOne(id);
         StudentsEntity update =  studentRepository.save(convert(studentUpdateRequest));
       return convert(update);
     }

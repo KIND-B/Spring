@@ -11,5 +11,5 @@ public interface StudentService {
 
     StudentsEntity save(StudentRequest studentRequest);
 
-    studentUpdateResponse update(studentUpdateRequest studentUpdateRequest);
+    studentUpdateResponse update(studentUpdateRequest studentUpdateRequest, Long id);
 }
