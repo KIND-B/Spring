@@ -26,8 +26,13 @@ public class StudentServiceImpl implements StudentService {
     public studentUpdateResponse update(studentUpdateRequest studentUpdateRequest, Long id) {
 
         StudentsEntity studentReq = this.studentRepository.getOne(id);
-        StudentsEntity update =  studentRepository.save(convert(studentUpdateRequest));
-      return convert(update);
+        studentReq.setAddress(studentUpdateRequest.getAddress());
+        studentReq.setName(studentUpdateRequest.getName());
+        studentReq.setContact(studentUpdateRequest.getContact());
+        StudentsEntity update =  studentRepository.save(studentReq);
+
+
+         return convert(update);
     }
 
     //SAVE
@@ -51,6 +56,7 @@ public class StudentServiceImpl implements StudentService {
         student.setName(studentUpdateRequest.getName());
         student.setContact(studentUpdateRequest.getContact());
         student.setAddress(studentUpdateRequest.getAddress());
+
 //        bankBranch.setIsDeleted(0);
 
         return student;
@@ -65,6 +71,7 @@ public class StudentServiceImpl implements StudentService {
         stuUpdate.setName(studentsEntity.getName());
         stuUpdate.setContact(studentsEntity.getContact());
         stuUpdate.setAddress(studentsEntity.getAddress());
+        System.out.println("printed id" + studentsEntity.getId());
 //        bankBranch.setIsDeleted(0);
 
         return stuUpdate;
