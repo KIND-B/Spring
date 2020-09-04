@@ -2,11 +2,13 @@ package com.projectTest.example.projectTest.service;
 
 import com.projectTest.example.projectTest.dto.request.StudentRequest;
 import com.projectTest.example.projectTest.dto.request.studentUpdateRequest;
+import com.projectTest.example.projectTest.dto.response.StudentDeleteResponse;
 import com.projectTest.example.projectTest.dto.response.studentUpdateResponse;
 import com.projectTest.example.projectTest.entity.StudentsEntity;
 import com.projectTest.example.projectTest.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -76,4 +78,19 @@ public class StudentServiceImpl implements StudentService {
 
         return stuUpdate;
     }
+
+//delete
+    @Override
+    public StudentDeleteResponse delete(Long id) {
+        studentRepository.deleteById(id);
+        StudentDeleteResponse std = new StudentDeleteResponse();
+
+        std.setId(id);
+        return std;
+
+
+
+    }
+
+
 }
