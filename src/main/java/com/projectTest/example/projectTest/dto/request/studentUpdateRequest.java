@@ -9,9 +9,15 @@ public class studentUpdateRequest {
 
     private Long id;
     @NotNull
-    private String name;
+    private String first_name;
     @NotNull
     private String address;
     @NotNull
     private String contact;
+    @NotNull
+    private String last_name;
+    @NotNull
+    private String st_grade;
+    @NotNull
+    private String st_class;
 }

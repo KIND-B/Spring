@@ -6,7 +6,10 @@ import lombok.Data;
 public class studentUpdateResponse {
 
     private Long id;
-    private String name;
+    private String first_name;
     private String address;
     private String contact;
+    private String last_name;
+    private String st_grade;
+    private String st_class;
 }

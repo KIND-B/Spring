@@ -32,12 +32,12 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
-    @PostMapping("products")
+    @PostMapping("student")
     public void add(@RequestBody StudentRequest request) {
         studentService.save(request);
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/student/{id}")
     public  ResponseEntity<studentUpdateResponse> update(@PathVariable("id") long id,@RequestBody studentUpdateRequest updateRequest){
 
 
@@ -51,7 +51,7 @@ public class StudentController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<StudentDeleteResponse> deleteStudent(@PathVariable("id") Long id){
-        System.out.println("fuck" + id);
+
         StudentDeleteResponse delete = studentService.delete(id);
 
         if (delete == null) {

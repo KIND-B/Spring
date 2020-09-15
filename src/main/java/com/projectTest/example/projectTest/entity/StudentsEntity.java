@@ -14,11 +14,20 @@ public class StudentsEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="Name")
-    private String name;
+    @Column(name="First_Name")
+    private String first_name;
+
+    @Column(name="Last_Name")
+    private String last_name;
 
     @Column(name = "Address")
     private String address;
+
+    @Column(name = "Grade")
+    private String st_grade;
+
+    @Column(name = "Class")
+    private String st_class;
 
     @Column( name = "contact")
     private String contact;
