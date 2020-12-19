@@ -11,7 +11,7 @@ public class StudentsEntity {
 
     @Id
     @Column(name="Id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="First_Name")

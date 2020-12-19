@@ -9,11 +9,11 @@ import javax.persistence.*;
 @Entity
 @Table(name="Health_Issues")
 @Data
-public class HealthIssues {
+public class HealthIssuesEntity {
 
     @Id
     @Column(name="Health_Id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "Health_Type")

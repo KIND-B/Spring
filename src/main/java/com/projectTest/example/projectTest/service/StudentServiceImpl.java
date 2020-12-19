@@ -1,19 +1,31 @@
 package com.projectTest.example.projectTest.service;
 
+import com.projectTest.example.projectTest.dto.request.StudentClassSaveRequest;
+import com.projectTest.example.projectTest.dto.request.StudentGradeSaveRequest;
 import com.projectTest.example.projectTest.dto.request.StudentRequest;
 import com.projectTest.example.projectTest.dto.request.studentUpdateRequest;
+import com.projectTest.example.projectTest.dto.response.StudentClassDeleteResponse;
 import com.projectTest.example.projectTest.dto.response.StudentDeleteResponse;
+import com.projectTest.example.projectTest.dto.response.StudentGradeDeleteResponse;
 import com.projectTest.example.projectTest.dto.response.studentUpdateResponse;
+import com.projectTest.example.projectTest.entity.StudentClassEntity;
+import com.projectTest.example.projectTest.entity.StudentGradeEntity;
 import com.projectTest.example.projectTest.entity.StudentsEntity;
+import com.projectTest.example.projectTest.repository.StudentClassRepository;
+import com.projectTest.example.projectTest.repository.StudentGradeRepository;
 import com.projectTest.example.projectTest.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
-    StudentRepository studentRepository;
+    private StudentRepository studentRepository;
+    @Autowired
+    private StudentGradeRepository studentGradeRepository;
+    @Autowired
+    private StudentClassRepository studentClassRepository;
+
     @Override
     public StudentsEntity save(StudentRequest studentRequest) {
 
@@ -21,10 +33,35 @@ public class StudentServiceImpl implements StudentService {
 
 
 
-//        System.out.println("--------- save method ----------");
+        System.out.println("--------- save method ----------" + save);
 
         return save;
     }
+
+    @Override
+    public StudentGradeEntity saveGrade(StudentGradeSaveRequest studentGradeSaveRequest) {
+
+         StudentGradeEntity grades = studentGradeRepository.save(convert(studentGradeSaveRequest));
+
+       return grades;
+    }
+
+    @Override
+    public StudentClassEntity saveClass(StudentClassSaveRequest studentClassSaveRequest) {
+
+        StudentClassEntity classes = studentClassRepository.save(convert(studentClassSaveRequest));
+        return classes;
+    }
+
+    private StudentClassEntity convert(StudentClassSaveRequest studentClassSaveRequest) {
+
+        StudentClassEntity stclss = new StudentClassEntity();
+        stclss.setId(studentClassSaveRequest.getId());
+        stclss.setClass_name(studentClassSaveRequest.getClass_name());
+
+        return stclss;
+    }
+
 
     @Override
     public studentUpdateResponse update(studentUpdateRequest studentUpdateRequest, Long id) {
@@ -52,9 +89,17 @@ public class StudentServiceImpl implements StudentService {
         student.setSt_class(studentRequest.getSt_class());
         student.setSt_grade(studentRequest.getSt_grade());
         student.setLast_name(studentRequest.getLast_name());
-
+        System.out.println(student);
 
         return student;
+    }
+
+    //saveGrade
+    private StudentGradeEntity convert(StudentGradeSaveRequest studentGradeSaveRequest){
+        StudentGradeEntity grade = new StudentGradeEntity();
+        grade.setId(studentGradeSaveRequest.getId());
+        grade.setGrade_name(studentGradeSaveRequest.getGrade_name());
+        return grade;
     }
 
     /**
@@ -104,6 +149,29 @@ public class StudentServiceImpl implements StudentService {
 
 
 
+    }
+
+    @Override
+    public StudentGradeDeleteResponse deleteGrade(Long id) {
+
+        studentGradeRepository.deleteById(id);
+
+        StudentGradeDeleteResponse stGrdDel = new StudentGradeDeleteResponse();
+
+        stGrdDel.setId(id);
+        System.out.println("fuck2" + stGrdDel);
+        return stGrdDel;
+
+    }
+
+    @Override
+    public StudentClassDeleteResponse deleteClass(Long id) {
+        studentClassRepository.deleteById(id);
+
+        StudentClassDeleteResponse stClassDelete = new StudentClassDeleteResponse();
+
+       stClassDelete.setId(id);
+       return  stClassDelete;
     }
 
 
